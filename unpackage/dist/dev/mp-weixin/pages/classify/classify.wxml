@@ -1,0 +1,1 @@
+<nav-page wx:if="{{a}}" class="data-v-6bcfa975" u-i="6bcfa975-0" bind:__l="__l" u-p="{{a}}"></nav-page><view class="content data-v-6bcfa975"><view wx:for="{{b}}" wx:for-item="item" wx:key="c" class="itemBox data-v-6bcfa975"><theme-item wx:if="{{item.b}}" class="data-v-6bcfa975" u-i="{{item.a}}" bind:__l="__l" u-p="{{item.b}}"></theme-item></view></view>

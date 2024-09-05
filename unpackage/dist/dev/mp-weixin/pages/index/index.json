@@ -1,0 +1,11 @@
+{
+  "navigationBarTitleText": "首页",
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "nav-page": "../../components/navPage",
+    "banner-page": "./components/bannerPage",
+    "notice-page": "./components/noticePage",
+    "common-title": "../../components/common-title",
+    "theme-item": "../../components/theme-item"
+  }
+}
