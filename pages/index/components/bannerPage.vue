@@ -1,13 +1,15 @@
 <template>
 			<view class="banner">
-				<swiper circular indicator-dots indicator-color="rgba(255,255,255,0.5)" 
+				<swiper class="swiper" circular indicator-dots indicator-color="rgba(255,255,255,0.5)" 
 				indicator-active-color="#fff" autoplay>
-					<swiper-item v-for="item in bannerList" :key="item._id">
+					<swiper-item class="swiper-item" v-for="item in bannerList" :key="item._id">
 						
 						<navigator  
 						class="like"
+						url="/pages/classify/classify"
+						open-type="switchTab"
 						>
-							<image :src="item.picurl" mode="aspectFill"></image>
+							<image class="image" :src="item.picurl" mode="aspectFill"></image>
 						</navigator>
 						
 					</swiper-item>				
@@ -29,16 +31,16 @@ onMounted(async()=>{
 <style scoped lang="scss">	
 	.banner{
 		width: 100%;
-		swiper{
+		.swiper{
 			width: 100%;
 			height: 340rpx;
-			swiper-item{
+			.swiper-item{
 				width: 100%;
 				height: 340rpx;
 				.like{
 					width: 100%;
 					height: 340rpx;
-					image{
+					.image{
 						width: 100%;
 						height: 340rpx;
 						border-radius: 10rpx;

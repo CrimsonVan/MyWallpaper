@@ -8,12 +8,6 @@ function apiGetBanner() {
 function apiGetDayRandom() {
   return utils_request.request({ url: "/randomWall" });
 }
-function apiGetNotice(data = {}) {
-  return utils_request.request({
-    url: "/wallNewsList",
-    data
-  });
-}
 function apiGetClassify(data = {}) {
   return utils_request.request({
     url: "/classify",
@@ -61,7 +55,6 @@ exports.apiGetClassList = apiGetClassList;
 exports.apiGetClassify = apiGetClassify;
 exports.apiGetDayRandom = apiGetDayRandom;
 exports.apiGetHistoryList = apiGetHistoryList;
-exports.apiGetNotice = apiGetNotice;
 exports.apiGetSetupScore = apiGetSetupScore;
 exports.apiSearchData = apiSearchData;
 exports.apiUserInfo = apiUserInfo;

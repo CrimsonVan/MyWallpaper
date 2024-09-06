@@ -37,8 +37,8 @@
 			</commonTitle>
 			<!--分类模块  -->
 			<view class="content">
-				<view class="itemBox" v-for="(item,index) in classifyList" :key="index">
-					<themeItem :data="item" :more="false" ></themeItem>	
+				<view class="itemBox" v-for="(data,index) in classifyList" :key="index">
+					<themeItem :data=data :more="false" ></themeItem>	
 				</view>
 				<view class="itemBox" >
 					<themeItem  :more="true" ></themeItem>	
@@ -56,7 +56,7 @@ import navPage from "@/components/navPage.vue"
 import bannerPage from "./components/bannerPage.vue"
 import noticePage from "./components/noticePage.vue"
 import commonTitle from "@/components/common-title.vue"
-import themeItem from "@/components/theme-item.vue"
+import themeItem from "../../components/theme-item.vue"
 import { apiGetClassify,apiGetDayRandom } from "@/api/api.js"
 
 const title=ref('推荐')
@@ -66,9 +66,11 @@ const getDayRandom = async ()=>{
 	let res =await apiGetDayRandom();
 	randomList.value = res.data	
 	uni.setStorageSync("storgClassList",randomList.value);
+	console.log('打印res',res);
 	
 }
 const goPreview = (id)=>{
+	uni.setStorageSync("storgClassList",randomList.value);
 	uni.navigateTo({
 		url:'/pages/preview/preview?id='+id
 	})
@@ -79,10 +81,10 @@ const getClassifyList=async ()=>{
 		})
 	classifyList.value=res.data
 }
-onMounted(()=>{
+
  getClassifyList()
  getDayRandom()
-})
+
 </script>
 
 <style scoped lang="scss">
@@ -132,6 +134,7 @@ onMounted(()=>{
 				.itemBox{
 					width: 33.3%;
 					height: 345rpx;
+					
 					// background-color: gold;
 					display: flex;
 					justify-content: center;

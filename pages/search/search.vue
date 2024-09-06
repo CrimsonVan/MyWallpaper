@@ -49,7 +49,7 @@
      	<view class="content" 
      	    v-for="item in classList"
      		:key="item._id">
-     		<navigator url="/pages/preview/preview" open-type="navigate"  class="item" >			
+     		<navigator :url="'/pages/preview/preview?id='+item._id" open-type="navigate"  class="item" >			
      			<image :src="item.smallPicurl" mode="aspectFill"></image>
      		</navigator>
      	</view>   	

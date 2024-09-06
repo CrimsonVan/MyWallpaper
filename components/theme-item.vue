@@ -1,13 +1,15 @@
 <template>
-		<view class="themeItem">
-			<navigator 		
-			class="box" 
+		<view  class="themeItem">
+			<!-- :url="'/pages/classlist/classlist?id='+data._id+'&name='+data?.name" -->
+			<navigator		
+			:url="'/pages/classlist/classlist?id='+data._id+'&name='+data?.name"
+			class="box"
 			v-if="!more"
-			:url="'/pages/classlist/classlist?id='+data._id+'&name='+data.name"
-			open-type="navigate"
+			
 			>	
-				<image class="pic" :src="props.data.picurl" mode="aspectFill"></image>
-				<view class="mask">{{props.data.name}}</view>
+			<!-- :url="'/pages/classlist/classlist?id='+data._id+'&name='+data.name" -->
+				<image class="pic" :src="data.picurl" mode="aspectFill"></image>
+				<view class="mask">{{data.name}}</view>
 			</navigator>
 			<navigator
 			url="/pages/classify/classify"
@@ -37,14 +39,19 @@ const props=defineProps({
 		},
 	data:{
 		type:Object,
-		default:{
-			name:'暂无',
-			picurl:"https://mp-0cb878b7-99ec-44ea-8246-12b123304b05.cdn.bspapp.com/xxmBizhi/20231010/1696900747351_2102.jpg"
+		default(){
+			return {
+				name:"默认名称",
+				picurl:"https://mp-0cb878b7-99ec-44ea-8246-12b123304b05.cdn.bspapp.com/xxmBizhi/20231010/1696900747351_2102.jpg",
+				_id:'11212'
+			}
 		}
 	}	
 })
-const name=ref(props.data.name)
-const id=ref(props.data.id)
+// console.log(props.);
+// const props = defineProps(['data','more'])
+// console.log('打印data',props.data);
+
 const goMoreTheme=()=>{
 	uni.switchTab({
 		url:'/pages/classify/classify'

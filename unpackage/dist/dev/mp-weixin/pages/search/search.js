@@ -112,7 +112,8 @@ const _sfc_main = {
         k: common_vendor.f(classList.value, (item, k0, i0) => {
           return {
             a: item.smallPicurl,
-            b: item._id
+            b: "/pages/preview/preview?id=" + item._id,
+            c: item._id
           };
         }),
         l: classList.value.length >= 1

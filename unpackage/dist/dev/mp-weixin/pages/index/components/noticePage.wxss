@@ -39,11 +39,11 @@
 .notice .center.data-v-eff1f831 {
   flex: 1;
 }
-.notice .center swiper.data-v-eff1f831 {
+.notice .center .swiper.data-v-eff1f831 {
   width: 100%;
   height: 100%;
 }
-.notice .center swiper swiper-item.data-v-eff1f831 {
+.notice .center .swiper .swiper-item.data-v-eff1f831 {
   height: 100%;
   width: 100%;
   font-size: 30rpx;

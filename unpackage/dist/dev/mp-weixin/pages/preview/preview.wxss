@@ -28,13 +28,16 @@
   height: 100vh;
   position: relative;
 }
-.preview swiper.data-v-2dad6c07 {
+.preview .swiper.data-v-2dad6c07 {
   width: 100%;
   height: 100%;
 }
-.preview swiper image.data-v-2dad6c07 {
+.preview .swiper image.data-v-2dad6c07 {
   width: 100%;
   height: 100%;
+}
+.preview .mask.data-v-2dad6c07 {
+  color: #fff;
 }
 .preview .mask .goBack.data-v-2dad6c07 {
   position: absolute;

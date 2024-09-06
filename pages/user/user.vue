@@ -2,6 +2,7 @@
 	<view class="userLayout pageBg" v-if="userinfo">
 		<!-- 安全高度 -->
 		<view :style="{height:getNavBarHeight()+'px'}"></view>
+	
 		<!-- 身份信息 -->
 		<view class="userInfo">
 			<!-- 头像 -->
@@ -62,7 +63,11 @@
 				</view>			
 			</view>
 		</view>
-	 </view>	
+	 </view>
+	 <view class="loadingLayout" v-else>
+	 	<view :style="{height:getNavBarHeight()+'px'}"></view>
+	 	<uni-load-more status="loading"></uni-load-more>
+	 </view>  
 </template>
 
 <script setup>
@@ -70,11 +75,13 @@ import {getNavBarHeight} from "@/utils/height.js"
 import {ref,onMounted} from 'vue'	
 import {apiUserInfo} from "@/api/api.js"
 const title=ref('我的')
-const userinfo = ref()
+const userinfo = ref(null)
 onMounted(async()=>{
+
     let res = await apiUserInfo()
 	console.log('打印用户信息',res.data);
 	userinfo.value = res.data
+
 })
 </script>
 

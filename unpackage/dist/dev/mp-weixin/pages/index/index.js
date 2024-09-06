@@ -19,8 +19,10 @@ const _sfc_main = {
       let res = await api_api.apiGetDayRandom();
       randomList.value = res.data;
       common_vendor.index.setStorageSync("storgClassList", randomList.value);
+      console.log("打印res", res);
     };
     const goPreview = (id) => {
+      common_vendor.index.setStorageSync("storgClassList", randomList.value);
       common_vendor.index.navigateTo({
         url: "/pages/preview/preview?id=" + id
       });
@@ -31,10 +33,8 @@ const _sfc_main = {
       });
       classifyList.value = res.data;
     };
-    common_vendor.onMounted(() => {
-      getClassifyList();
-      getDayRandom();
-    });
+    getClassifyList();
+    getDayRandom();
     return (_ctx, _cache) => {
       return {
         a: common_vendor.p({
@@ -47,11 +47,11 @@ const _sfc_main = {
             c: common_vendor.o(($event) => goPreview(item._id), item._id)
           };
         }),
-        c: common_vendor.f(classifyList.value, (item, index, i0) => {
+        c: common_vendor.f(classifyList.value, (data, index, i0) => {
           return {
             a: "1cf27b2a-5-" + i0,
             b: common_vendor.p({
-              data: item,
+              data,
               more: false
             }),
             c: index

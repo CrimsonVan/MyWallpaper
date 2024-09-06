@@ -8,7 +8,7 @@
 			</navigator>
 		</view>	
 	</view>
-	<view class="loadingLayout" style="display: flex;justify-content: center;">
+	<view  class="loadingLayout" style="display: flex;justify-content: center;">
 		<uni-load-more :status="noData?'noMore':'loading'"></uni-load-more>
 	</view>
 </template>
@@ -24,6 +24,20 @@ const queryParams = {
 }
 const noData=ref(false)
 const classList = ref([])
+onLoad((e)=>{	
+	// let {id,name,type} = e;
+	
+	if(e?.type) {queryParams.type = e?.type}
+    if(e?.id){queryParams.classid = e?.id}	
+	
+	// pageName = name	
+	//修改导航标题
+	uni.setNavigationBarTitle({
+		title:e?.name
+	})
+	//执行获取分类列表方法
+	getClassList();
+})
 const getClassList =async () => {
 	let res
 	if(queryParams.type){res = await apiGetHistoryList(queryParams)}
@@ -39,19 +53,7 @@ onReachBottom(()=>{
 	queryParams.pageNum++;
 	getClassList();
 })
-onLoad((e)=>{	
-	// let {id,name,type} = e;
-	if(e.type) {queryParams.type = e.type}
-    if(e.id){queryParams.classid = e.id}	
-	
-	// pageName = name	
-	//修改导航标题
-	uni.setNavigationBarTitle({
-		title:e.name
-	})
-	//执行获取分类列表方法
-	getClassList();
-})
+
 
 // //关闭有页面
 onUnload(()=>{

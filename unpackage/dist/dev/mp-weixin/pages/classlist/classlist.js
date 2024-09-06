@@ -18,6 +18,18 @@ const _sfc_main = {
     };
     const noData = common_vendor.ref(false);
     const classList = common_vendor.ref([]);
+    common_vendor.onLoad((e) => {
+      if (e == null ? void 0 : e.type) {
+        queryParams.type = e == null ? void 0 : e.type;
+      }
+      if (e == null ? void 0 : e.id) {
+        queryParams.classid = e == null ? void 0 : e.id;
+      }
+      common_vendor.index.setNavigationBarTitle({
+        title: e == null ? void 0 : e.name
+      });
+      getClassList();
+    });
     const getClassList = async () => {
       let res;
       if (queryParams.type) {
@@ -36,18 +48,6 @@ const _sfc_main = {
       if (noData.value)
         return;
       queryParams.pageNum++;
-      getClassList();
-    });
-    common_vendor.onLoad((e) => {
-      if (e.type) {
-        queryParams.type = e.type;
-      }
-      if (e.id) {
-        queryParams.classid = e.id;
-      }
-      common_vendor.index.setNavigationBarTitle({
-        title: e.name
-      });
       getClassList();
     });
     common_vendor.onUnload(() => {

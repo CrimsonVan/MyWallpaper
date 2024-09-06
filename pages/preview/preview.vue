@@ -1,6 +1,6 @@
 <template>
-	<view class="preview" >
-		<swiper @change="swiperChange" circular :current="currentIndex" >
+	<view class="preview" v-if="currentInfo" >
+		<swiper class="swiper" @change="swiperChange" circular :current="currentIndex" >
 			<swiper-item v-for="(item,index) in classList" :key="item._id">
 				<image  :src="item.picurl" mode="aspectFill" @click="maskChange"></image>
 			</swiper-item>
@@ -74,7 +74,7 @@ import { getStatusBarHeight } from '@/utils/height.js'
 import { apiGetSetupScore,apiWriteDownload } from '@/api/api.js'
 const classList=ref([])
 const currentIndex=ref(0)
-const currentInfo=ref()
+const currentInfo=ref(null)
 const maskState=ref(true)
 const scorePopup=ref(false)
 const userScore=ref(0)
@@ -94,10 +94,22 @@ const storgClassList=ref(uni.getStorageSync("storgClassList"))
 onLoad((e)=>{
 	currentIndex.value = classList.value.findIndex(item => item._id == e.id)
 	currentInfo.value = classList.value[currentIndex.value]
+	console.log('测试preview的e');
 })
-const goBack=()=>{
-	uni.navigateBack()
-}
+
+//返回上一页
+const goBack = () => {
+		uni.navigateBack({
+			success: () => {
+				
+			},
+			fail: (err) => {
+				uni.reLaunch({
+					url:"/pages/index/index"
+				})
+			}
+		})
+	}
 const maskChange=()=>{
 	maskState.value = !maskState.value
 }
@@ -221,7 +233,7 @@ console.log('打印预览列表长度',classList.value.length);
 		height: 100vh;
 		position: relative;
 
-		swiper {
+		.swiper {
 			width: 100%;
 			height: 100%;
 
@@ -232,6 +244,7 @@ console.log('打印预览列表长度',classList.value.length);
 		}
 		
 		.mask{
+			color: #fff;
 			.goBack{
 				position: absolute;
 				width: 38px;

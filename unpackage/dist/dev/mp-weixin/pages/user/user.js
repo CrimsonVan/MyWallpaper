@@ -4,17 +4,19 @@ const utils_height = require("../../utils/height.js");
 const api_api = require("../../api/api.js");
 if (!Array) {
   const _easycom_uni_icons2 = common_vendor.resolveComponent("uni-icons");
-  _easycom_uni_icons2();
+  const _easycom_uni_load_more2 = common_vendor.resolveComponent("uni-load-more");
+  (_easycom_uni_icons2 + _easycom_uni_load_more2)();
 }
 const _easycom_uni_icons = () => "../../uni_modules/uni-icons/components/uni-icons/uni-icons.js";
+const _easycom_uni_load_more = () => "../../uni_modules/uni-load-more/components/uni-load-more/uni-load-more.js";
 if (!Math) {
-  _easycom_uni_icons();
+  (_easycom_uni_icons + _easycom_uni_load_more)();
 }
 const _sfc_main = {
   __name: "user",
   setup(__props) {
     common_vendor.ref("我的");
-    const userinfo = common_vendor.ref();
+    const userinfo = common_vendor.ref(null);
     common_vendor.onMounted(async () => {
       let res = await api_api.apiUserInfo();
       console.log("打印用户信息", res.data);
@@ -56,7 +58,12 @@ const _sfc_main = {
           size: "15",
           color: "#aaa"
         })
-      } : {});
+      } : {
+        m: common_vendor.unref(utils_height.getNavBarHeight)() + "px",
+        n: common_vendor.p({
+          status: "loading"
+        })
+      });
     };
   }
 };

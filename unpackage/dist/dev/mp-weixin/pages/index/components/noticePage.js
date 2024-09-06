@@ -1,6 +1,5 @@
 "use strict";
 const common_vendor = require("../../../common/vendor.js");
-const api_api = require("../../../api/api.js");
 if (!Array) {
   const _easycom_uni_icons2 = common_vendor.resolveComponent("uni-icons");
   _easycom_uni_icons2();
@@ -12,15 +11,10 @@ if (!Math) {
 const _sfc_main = {
   __name: "noticePage",
   setup(__props) {
-    const noticeList = common_vendor.ref(null);
-    const getNoticeList = async () => {
-      let res = await api_api.apiGetNotice({ select: true });
-      noticeList.value = res.data;
-      console.log("打印notice", noticeList);
-    };
-    common_vendor.onMounted(() => {
-      getNoticeList();
-    });
+    const noticeList = common_vendor.ref([
+      { title: "本小程序若涉及侵权本站立即删除" },
+      { title: "所有壁纸均从网络上获取仅供学习" }
+    ]);
     return (_ctx, _cache) => {
       return common_vendor.e({
         a: noticeList.value

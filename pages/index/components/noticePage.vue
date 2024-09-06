@@ -5,8 +5,8 @@
 					<text class="text">公告</text>
 				</view>
 				<view class="center">
-					<swiper vertical autoplay interval="1500" duration="300" circular>
-						<swiper-item v-for="(item,index) in noticeList" :key="index">
+					<swiper class="swiper" vertical autoplay interval="1500" duration="300" circular>
+						<swiper-item class="swiper-item" v-for="(item,index) in noticeList" :key="index">
 							<navigator>
 						        {{item.title}}
 							</navigator>
@@ -22,15 +22,8 @@
 <script setup>
 import { ref , onMounted}from'vue'	
 import { apiGetNotice }from'@/api/api.js'	
-const noticeList = ref(null)
-const getNoticeList = async()=>{
-		let res =await apiGetNotice({select:true});
-		noticeList.value = res.data
-		console.log('打印notice',noticeList);
-	}
-onMounted(()=>{
-   getNoticeList()
-})	
+const noticeList = ref([{title:'本小程序若涉及侵权本站立即删除'},
+{title:'所有壁纸均从网络上获取仅供学习'}])
 
 </script>
 
@@ -49,10 +42,10 @@ onMounted(()=>{
 		}
 		.center{
 			flex:1;
-			swiper{
+			.swiper{
 				width: 100%;
 				height: 100%;
-				swiper-item{
+				.swiper-item{
 					height: 100%;
 					width: 100%;
 					font-size: 30rpx;
