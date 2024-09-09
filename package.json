@@ -10,6 +10,9 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "eslint": "^9.10.0",
+    "pinia": "^2.2.1",
+    "pinia-plugin-persistedstate": "^3.2.1",
     "unplugin-auto-import": "^0.18.2"
   }
 }

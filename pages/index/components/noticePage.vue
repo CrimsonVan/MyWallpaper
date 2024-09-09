@@ -4,7 +4,7 @@
 					<uni-icons type="sound-filled" size="20"></uni-icons>
 					<text class="text">公告</text>
 				</view>
-				<view class="center">
+			    	<view class="center">
 					<swiper class="swiper" vertical autoplay interval="1500" duration="300" circular>
 						<swiper-item class="swiper-item" v-for="(item,index) in noticeList" :key="index">
 							<navigator>

@@ -37,7 +37,7 @@
 			</commonTitle>
 			<!--分类模块  -->
 			<view class="content">
-				<view class="itemBox" v-for="(data,index) in classifyList" :key="index">
+				<view class="itemBox" v-for="(data,index) in classifyList " :key="index">
 					<themeItem :data=data :more="false" ></themeItem>	
 				</view>
 				<view class="itemBox" >
@@ -51,38 +51,36 @@
 </template>
 
 <script setup>
-import {ref,onMounted} from 'vue'	
+import {ref,onMounted, computed} from 'vue'	
 import navPage from "@/components/navPage.vue"
 import bannerPage from "./components/bannerPage.vue"
 import noticePage from "./components/noticePage.vue"
 import commonTitle from "@/components/common-title.vue"
 import themeItem from "../../components/theme-item.vue"
-import { apiGetClassify,apiGetDayRandom } from "@/api/api.js"
-
+import { apiGetDayRandom } from "@/api/api.js"
+import { useCateStore,useStorgClassListStore } from '../../store'
 const title=ref('推荐')
-const classifyList=ref()
 const randomList=ref()
+const cateStore=useCateStore()
+const storgClassListStore=useStorgClassListStore()
 const getDayRandom = async ()=>{
 	let res =await apiGetDayRandom();
 	randomList.value = res.data	
-	uni.setStorageSync("storgClassList",randomList.value);
-	console.log('打印res',res);
+	// uni.setStorageSync("storgClassList",randomList.value);
+	storgClassListStore.setStorgClassList(randomList.value)
 	
 }
 const goPreview = (id)=>{
-	uni.setStorageSync("storgClassList",randomList.value);
+	// uni.setStorageSync("storgClassList",randomList.value);
+	storgClassListStore.setStorgClassList(randomList.value)
 	uni.navigateTo({
 		url:'/pages/preview/preview?id='+id
 	})
 }
-const getClassifyList=async ()=>{
-	let res = await apiGetClassify({
-			pageSize:8
-		})
-	classifyList.value=res.data
-}
-
- getClassifyList()
+const classifyList=computed(()=>{
+	return cateStore.classifyList?.slice(0,8)
+})
+ cateStore.getClassifyList()
  getDayRandom()
 
 </script>

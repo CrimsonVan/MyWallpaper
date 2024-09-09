@@ -1,7 +1,7 @@
 <template>
 	<navPage :title="title"></navPage>
 	<view class="content">
-		<view class="itemBox" v-for="(item,index) in classifyList" :key="index">
+		<view class="itemBox" v-for="(item,index) in cateStore.classifyList" :key="index">
 			<themeItem :more="false" :data="item" ></themeItem>	
 		</view>
 	</view>
@@ -11,17 +11,19 @@
 import {ref,onMounted} from 'vue'	
 import navPage from "@/components/navPage.vue"
 import themeItem from "@/components/theme-item.vue"
-import { apiGetClassify } from "@/api/api.js"
+// import { apiGetClassify } from "@/api/api.js"
+import { useCateStore } from '../../store'
+const cateStore=useCateStore()
 const title=ref('分类')
-const classifyList=ref()
-onMounted(async()=>{
- let res = await apiGetClassify({
-		pageSize:15
-	})
+// const classifyList=ref()
+// onMounted(async()=>{
+//  let res = await apiGetClassify({
+// 		pageSize:15
+// 	})
 
- classifyList.value=res.data
+//  classifyList.value=res.data
 
-})
+// })
 
 </script>
 

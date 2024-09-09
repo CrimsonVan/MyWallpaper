@@ -62,10 +62,14 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref,computed } from 'vue'
 import { apiSearchData } from '@/api/api.js'	
 import { onReachBottom ,onUnload} from "@dcloudio/uni-app"
-const historySearch = ref(uni.getStorageSync("historySearch"))
+import { useStorgClassListStore,useHistoryStore } from "../../store";
+const storgClassListStore=useStorgClassListStore()
+const historyStore=useHistoryStore()
+// const historySearch = ref(uni.getStorageSync("historySearch"))
+const historySearch = computed(()=>historyStore.historyArr)
 const recommendList = ref(["美女","帅哥","宠物","卡通"]);
 const queryParams=ref({
 	pageNum:1,
@@ -82,14 +86,16 @@ const goSearch =async () =>{
 	uni.showLoading({
 		title:"加载中"
 	})
-	historySearch.value =
-	[...new Set([queryParams.value.keyword,...historySearch.value])].slice(0,10);
+	// historySearch.value =
+	// [...new Set([queryParams.value.keyword,...historySearch.value])].slice(0,10);
 	
-	uni.setStorageSync("historySearch",historySearch.value);
+	// uni.setStorageSync("historySearch",historySearch.value);
+	historyStore.setHistoryArr([...new Set([queryParams.value.keyword,...historySearch.value])].slice(0,10))
 	try{
 		let res =  await apiSearchData(queryParams.value);
 		classList.value  =  [...classList.value,...res.data] ;
-		uni.setStorageSync("storgClassList",classList.value);	
+		// uni.setStorageSync("storgClassList",classList.value);
+		storgClassListStore.setStorgClassList(classList.value)
 		if(queryParams.value.pageSize > res.data.length) noData.value = true;
 	    uni.hideLoading()
 	}catch{
@@ -104,8 +110,7 @@ const removeHistory = ()=>{
 		title:"是否清空历史搜索？",
 		success:res=>{
 			if(res.confirm){
-				uni.removeStorageSync("historySearch");
-				historySearch.value = []
+				historyStore.delHistoryArr()
 			}
 		}
 	})
@@ -129,7 +134,8 @@ const initParams = ()=>{
 
 // //关闭有页面
 onUnload(()=>{
-	uni.removeStorageSync("storgClassList",[]);	
+	// uni.removeStorageSync("storgClassList",[]);	
+	storgClassListStore.delStorgClassList()
 })
 </script>
 

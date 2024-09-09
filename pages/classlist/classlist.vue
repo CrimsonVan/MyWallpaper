@@ -17,6 +17,8 @@
 import { onLoad,onReachBottom,onUnload } from "@dcloudio/uni-app"
 import { apiGetClassList,apiGetHistoryList } from '@/api/api.js'
 import { ref } from 'vue'
+import { useStorgClassListStore } from "../../store";
+const storgClassListStore=useStorgClassListStore()
 //定义data参数
 const queryParams = {
 	pageNum:1,
@@ -46,7 +48,8 @@ const getClassList =async () => {
 		noData.value=true
 	}
 	classList.value = [...classList.value,...res.data]
-	uni.setStorageSync("storgClassList",classList.value);
+	// uni.setStorageSync("storgClassList",classList.value);
+	storgClassListStore.setStorgClassList(classList.value)
 }
 onReachBottom(()=>{
 	if(noData.value) return;
@@ -57,7 +60,7 @@ onReachBottom(()=>{
 
 // //关闭有页面
 onUnload(()=>{
-	uni.removeStorageSync("storgClassList",[]);	
+	storgClassListStore.delStorgClassList()
 })
 </script>
 

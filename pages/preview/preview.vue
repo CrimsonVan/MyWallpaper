@@ -72,7 +72,9 @@ import {ref} from "vue";
 import { onLoad } from '@dcloudio/uni-app'
 import { getStatusBarHeight } from '@/utils/height.js'
 import { apiGetSetupScore,apiWriteDownload } from '@/api/api.js'
+import { useStorgClassListStore } from "../../store";
 const classList=ref([])
+const storgClassListStore=useStorgClassListStore()
 const currentIndex=ref(0)
 const currentInfo=ref(null)
 const maskState=ref(true)
@@ -84,7 +86,8 @@ const clickScoreClose=()=>{
 	userScore.value = 0;
 	isScore.value = false;
 }
-const storgClassList=ref(uni.getStorageSync("storgClassList"))
+// const storgClassList=ref(uni.getStorageSync("storgClassList"))
+const storgClassList=ref(storgClassListStore.storgClassList)
 	classList.value = storgClassList.value.map(item => {
 		return {
 			...item,

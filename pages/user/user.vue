@@ -7,7 +7,7 @@
 		<view class="userInfo">
 			<!-- 头像 -->
 			<view class="avatar">
-				<image src="https://mp-e0d15f0f-d6bf-4f95-b183-b82aede04535.cdn.bspapp.com/O4S9HnBMw7Tv9169c1cf7b8daa9237440516e6d028d7.jpg" mode="aspectFill"></image>
+				<image src="https://mp-e0d15f0f-d6bf-4f95-b183-b82aede04535.cdn.bspapp.com/可爱蜘蛛侠.png" mode="aspectFill"></image>
 			</view>
 			<!-- ip地址 -->
 			<view class="ip">{{userinfo.IP}}</view>
